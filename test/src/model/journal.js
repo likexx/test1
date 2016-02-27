@@ -14,6 +14,10 @@ var schema = new mongoose.Schema({
 } 
 })
 
+//
+//  use document _id as the journal's unique id.
+//  we need to explicitly do the conversion since mongoosejs has its own "id" field
+//
 schema.options.toJSON = {
     transform: function(doc, ret, options) {
         ret.id = ret._id;
