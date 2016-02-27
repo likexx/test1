@@ -1,0 +1,32 @@
+web:
+  image: nginx
+  ports:
+   - "80:80"
+  volumes:
+   - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+  links:
+   - app1
+   - app2
+
+app1:
+  build: ./src
+  links:
+    - mongo
+    - redis
+  # ports:
+  #  - "80:80"
+  # volumes:
+  #  - ./src:/src
+
+app2:
+  build: ./src
+  links:
+    - mongo
+    - redis
+
+
+mongo:
+  image: mongo:3.2
+
+redis:
+  image: redis:3.0
